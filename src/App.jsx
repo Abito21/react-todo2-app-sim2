@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Todos from './components/Todos'
+import TodoForm from './components/TodoForm'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 // import './App.css'
@@ -45,10 +46,25 @@ const App = () => {
     setTodos(newTodos)
   }
 
+  const addTodo = (todoTitle) => {
+    if(todoTitle === '') {
+      return
+    }
+
+    const newTodos = {
+      id: todos.length + 1,
+      title: todoTitle,
+      completed: false,
+    }
+
+    const updatedTodos = todos.concat(newTodos)
+    setTodos(updatedTodos)
+  }
+
   return(
     <div style={{textAlign:"center", padding:"12px"}}>
       <h1 style={{fontSize: "36px"}}>My Todo List</h1>
-      
+      <TodoForm addTodo={addTodo} />
       <Todos 
         todos={todos} 
         toggleCompleted={toggleCompleted} 
